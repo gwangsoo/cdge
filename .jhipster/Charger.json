@@ -1,0 +1,30 @@
+{
+  "applications": ["ecs"],
+  "changelogDate": "20220706083435",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "tb_cdge_charger",
+  "fields": [],
+  "fluentMethods": true,
+  "javadoc": "충전기",
+  "jpaMetamodelFiltering": false,
+  "name": "Charger",
+  "pagination": "infinite-scroll",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "meta",
+      "otherEntityRelationshipName": "charger",
+      "ownerSide": true,
+      "relationshipName": "meta",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "station",
+      "otherEntityRelationshipName": "charger",
+      "relationshipName": "station",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

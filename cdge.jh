@@ -1,0 +1,172 @@
+application {
+  config {
+    applicationType monolith
+    authenticationType jwt
+    baseName ecs
+    buildTool gradle
+    enableSwaggerCodegen true
+    languages [en,ko]
+    nativeLanguage ko
+    packageName com.hae
+    devDatabaseType h2Memory
+    prodDatabaseType mariadb
+    clientFramework vue
+    skipClient true
+  }
+  entities *
+  dto * with mapstruct
+  service * with serviceImpl
+  paginate * with infinite-scroll
+}
+
+/** 콘넥터 유형 */
+enum ConnectorType{
+  Mennekes,
+  Pantograph,
+  CCS,
+  CHAdeMO,
+  Schuko,
+  Type1,
+  Type3,
+  Caravan
+}
+
+/** 전류유형 */
+enum CurrentType {
+  AC,
+  DC
+}
+
+/** 콘넥터 */
+entity Connector (tb_cdge_connector) {
+  /** 콘넥터 유형 (Mennekes) */
+  type ConnectorType required
+  /** 최대소비전력량 (18) */
+  maxKwh Double min(0)
+  /** 최대소비전력 (18) */
+  maxKw Double min(0)
+  /** 전류유형 (AC) */
+  currentType CurrentType required
+  /** 상태 */
+  status String
+}
+
+/** 요금정책 */
+entity Pricing (tb_cdge_pricing) {
+  /** Translation key for the price name */
+  name String required maxlength(128)
+  priceCents Double required min(0)
+  currency String required maxlength(3)
+  priceCentsWithoutVat Double required min(0)
+  priceCentsVat Double required min(0)
+}
+
+/** 충전기 상태 */
+enum EvseStatus {
+  Disconnected,
+  Available,
+  Busy,
+  Unkown
+}
+
+/** 충전기 */
+entity Evse (tb_cdge_evse) {
+  /** 그룹명 */
+  groupName String maxlength(256)
+  /** 사용가능여부 Whether this EVSE is available for usage */
+  available Boolean required
+  /** 예약가능여부 Whether this EVSE is available for reservation */
+  reservable Boolean required
+  /** 일시불여부 Currently GET stations/{id} uses this field. Won't be added in that endpoint for Hubject stations.*/
+  oneTimePayment Boolean required
+  /** 상태 */
+  status Integer required
+}
+
+/** 충전기 */
+entity Charger (tb_cdge_charger) {}
+
+/** Availability */
+enum Availability {
+  PUBLIC,
+  SHARED,
+  PRIVATE
+}
+
+/** 충전기상태 */
+enum ChargerStatus {
+  FREE,
+  INUSE,
+  OFFLINE,
+  DISABLED
+}
+
+/** Meta정보 */
+entity Meta (tb_cdge_meta) {
+  /** Whether the station is currently in active use or not */
+  active Boolean
+  /** Who are available to see it and use it */
+  availability Availability
+  /** State the station is currently */
+  status ChargerStatus
+}
+
+/** Socket */
+entity Socket (tb_cdge_socket) {
+  name String required
+}
+
+/** Picture */
+entity Picture (tb_cdge_picture) {
+  context String maxlength(256)
+}
+
+/** 제공자 */
+enum Provider {
+  Virta,
+  Hubject,
+  OCPI
+}
+
+/** 충전소 */
+entity Station (tb_cdge_station) {
+  /** 판매자ID */
+  sellerId Integer
+  /** 충전소명 */
+  name String maxlength(256)
+  /** 위도 */
+  latitude Double
+  /** 경도 */
+  longitide Double
+  /** icon ID */
+  icon Integer
+  /** 주소 */
+  address String maxlength(256)
+  /**도시 */
+  city String maxlength(128)
+  /** 운영시간 */
+  openHours String maxlength(64)
+  /** 제공자 */
+  provider Provider
+  /** 알림메세지 */
+  alertMessage String maxlength(256)
+  /** 이동여부 */
+  isRemoved Boolean
+  /** 사적이용여부 */
+  isPrivate Boolean
+}
+
+relationship OneToOne {
+  Charger{meta} to Meta
+}
+
+relationship OneToMany {
+  Station to Evse
+  Station to Charger
+  Station to Picture
+  
+  Evse to Connector
+  Evse to Pricing
+
+  Meta to Socket
+}

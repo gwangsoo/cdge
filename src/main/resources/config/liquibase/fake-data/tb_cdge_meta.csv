@@ -1,0 +1,11 @@
+id;active;availability;status
+1;true;SHARED;INUSE
+2;false;PRIVATE;FREE
+3;false;PRIVATE;INUSE
+4;true;PUBLIC;DISABLED
+5;false;PUBLIC;INUSE
+6;true;PRIVATE;DISABLED
+7;false;PUBLIC;INUSE
+8;false;PRIVATE;DISABLED
+9;false;SHARED;FREE
+10;true;SHARED;INUSE
