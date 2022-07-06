@@ -1,0 +1,29 @@
+{
+  "applications": ["ecs"],
+  "changelogDate": "20220706083635",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "tb_cdge_socket",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "fluentMethods": true,
+  "javadoc": "Socket",
+  "jpaMetamodelFiltering": false,
+  "name": "Socket",
+  "pagination": "infinite-scroll",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "meta",
+      "otherEntityRelationshipName": "socket",
+      "relationshipName": "meta",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

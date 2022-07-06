@@ -1,0 +1,67 @@
+{
+  "applications": ["ecs"],
+  "changelogDate": "20220706083335",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "tb_cdge_evse",
+  "fields": [
+    {
+      "fieldName": "groupName",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "256",
+      "javadoc": "그룹명"
+    },
+    {
+      "fieldName": "available",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"],
+      "javadoc": "사용가능여부 Whether this EVSE is available for usage"
+    },
+    {
+      "fieldName": "reservable",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"],
+      "javadoc": "예약가능여부 Whether this EVSE is available for reservation"
+    },
+    {
+      "fieldName": "oneTimePayment",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"],
+      "javadoc": "일시불여부 Currently GET stations/{id} uses this field. Won't be added in that endpoint for Hubject stations."
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"],
+      "javadoc": "상태"
+    }
+  ],
+  "fluentMethods": true,
+  "javadoc": "충전기",
+  "jpaMetamodelFiltering": false,
+  "name": "Evse",
+  "pagination": "infinite-scroll",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "connector",
+      "otherEntityRelationshipName": "evse",
+      "relationshipName": "connector",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "pricing",
+      "otherEntityRelationshipName": "evse",
+      "relationshipName": "pricing",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "station",
+      "otherEntityRelationshipName": "evse",
+      "relationshipName": "station",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

@@ -1,0 +1,55 @@
+{
+  "applications": ["ecs"],
+  "changelogDate": "20220706083235",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "tb_cdge_pricing",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "128",
+      "javadoc": "Translation key for the price name"
+    },
+    {
+      "fieldName": "priceCents",
+      "fieldType": "Double",
+      "fieldValidateRules": ["required", "min"],
+      "fieldValidateRulesMin": "0"
+    },
+    {
+      "fieldName": "currency",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "3"
+    },
+    {
+      "fieldName": "priceCentsWithoutVat",
+      "fieldType": "Double",
+      "fieldValidateRules": ["required", "min"],
+      "fieldValidateRulesMin": "0"
+    },
+    {
+      "fieldName": "priceCentsVat",
+      "fieldType": "Double",
+      "fieldValidateRules": ["required", "min"],
+      "fieldValidateRulesMin": "0"
+    }
+  ],
+  "fluentMethods": true,
+  "javadoc": "요금정책",
+  "jpaMetamodelFiltering": false,
+  "name": "Pricing",
+  "pagination": "infinite-scroll",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "evse",
+      "otherEntityRelationshipName": "pricing",
+      "relationshipName": "evse",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

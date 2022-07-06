@@ -1,0 +1,43 @@
+{
+  "applications": ["ecs"],
+  "changelogDate": "20220706083535",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "tb_cdge_meta",
+  "fields": [
+    {
+      "fieldName": "active",
+      "fieldType": "Boolean",
+      "javadoc": "Whether the station is currently in active use or not"
+    },
+    {
+      "fieldName": "availability",
+      "fieldType": "Availability",
+      "fieldTypeJavadoc": "Availability",
+      "fieldValues": "PUBLIC,SHARED,PRIVATE",
+      "javadoc": "Who are available to see it and use it"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "ChargerStatus",
+      "fieldTypeJavadoc": "충전기상태",
+      "fieldValues": "FREE,INUSE,OFFLINE,DISABLED",
+      "javadoc": "State the station is currently"
+    }
+  ],
+  "fluentMethods": true,
+  "javadoc": "Meta정보",
+  "jpaMetamodelFiltering": false,
+  "name": "Meta",
+  "pagination": "infinite-scroll",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "socket",
+      "otherEntityRelationshipName": "meta",
+      "relationshipName": "socket",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "serviceImpl"
+}

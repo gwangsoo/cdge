@@ -1,0 +1,108 @@
+{
+  "applications": ["ecs"],
+  "changelogDate": "20220706083835",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "tb_cdge_station",
+  "fields": [
+    {
+      "fieldName": "sellerId",
+      "fieldType": "Integer",
+      "javadoc": "판매자ID"
+    },
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "256",
+      "javadoc": "충전소명"
+    },
+    {
+      "fieldName": "latitude",
+      "fieldType": "Double",
+      "javadoc": "위도"
+    },
+    {
+      "fieldName": "longitide",
+      "fieldType": "Double",
+      "javadoc": "경도"
+    },
+    {
+      "fieldName": "icon",
+      "fieldType": "Integer",
+      "javadoc": "icon ID"
+    },
+    {
+      "fieldName": "address",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "256",
+      "javadoc": "주소"
+    },
+    {
+      "fieldName": "city",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "128",
+      "javadoc": "도시"
+    },
+    {
+      "fieldName": "openHours",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "64",
+      "javadoc": "운영시간"
+    },
+    {
+      "fieldName": "provider",
+      "fieldType": "Provider",
+      "fieldTypeJavadoc": "제공자",
+      "fieldValues": "Virta,Hubject,OCPI",
+      "javadoc": "제공자"
+    },
+    {
+      "fieldName": "alertMessage",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "256",
+      "javadoc": "알림메세지"
+    },
+    {
+      "fieldName": "isRemoved",
+      "fieldType": "Boolean",
+      "javadoc": "이동여부"
+    },
+    {
+      "fieldName": "isPrivate",
+      "fieldType": "Boolean",
+      "javadoc": "사적이용여부"
+    }
+  ],
+  "fluentMethods": true,
+  "javadoc": "충전소",
+  "jpaMetamodelFiltering": false,
+  "name": "Station",
+  "pagination": "infinite-scroll",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "evse",
+      "otherEntityRelationshipName": "station",
+      "relationshipName": "evse",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "charger",
+      "otherEntityRelationshipName": "station",
+      "relationshipName": "charger",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "picture",
+      "otherEntityRelationshipName": "station",
+      "relationshipName": "picture",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "serviceImpl"
+}
