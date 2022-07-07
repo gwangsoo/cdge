@@ -1,8 +1,12 @@
 package com.hae.service.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.hae.domain.Connector;
+import com.hae.domain.Pricing;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
 import java.util.Objects;
+import java.util.Set;
 import javax.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -29,7 +33,7 @@ public class EvseDTO implements Serializable {
     /**
      * 그룹명
      */
-    @Size(max = 256)
+    @Size(max = 128)
     @Schema(description = "그룹명")
     private String groupName;
 
@@ -64,6 +68,13 @@ public class EvseDTO implements Serializable {
     @Schema(description = "상태", required = true)
     private Integer status;
 
-    private StationDTO station;
+    private Set<ConnectorDTO> connectors;
 
+    private Set<PricingDTO> pricings;
+
+    /**
+     * 충전소ID
+     */
+    @JsonIgnore
+    private Long stationId;
 }

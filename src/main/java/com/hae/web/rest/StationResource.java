@@ -11,6 +11,9 @@ import java.util.Objects;
 import java.util.Optional;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+
+import lombok.Data;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -30,6 +33,7 @@ import tech.jhipster.web.util.ResponseUtil;
  */
 @RestController
 @RequestMapping("/api")
+@RequiredArgsConstructor
 public class StationResource {
 
     private final Logger log = LoggerFactory.getLogger(StationResource.class);
@@ -42,11 +46,6 @@ public class StationResource {
     private final StationService stationService;
 
     private final StationRepository stationRepository;
-
-    public StationResource(StationService stationService, StationRepository stationRepository) {
-        this.stationService = stationService;
-        this.stationRepository = stationRepository;
-    }
 
     /**
      * {@code POST  /stations} : Create a new station.

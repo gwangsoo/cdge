@@ -1,9 +1,12 @@
 package com.hae.service.dto;
 
+import com.hae.domain.Charger;
+import com.hae.domain.Evse;
 import com.hae.domain.enumeration.Provider;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
 import java.util.Objects;
+import java.util.Set;
 import javax.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -36,7 +39,7 @@ public class StationDTO implements Serializable {
     /**
      * 충전소명
      */
-    @Size(max = 256)
+    @Size(max = 128)
     @Schema(description = "충전소명")
     private String name;
 
@@ -104,4 +107,9 @@ public class StationDTO implements Serializable {
     @Schema(description = "사적이용여부")
     private Boolean isPrivate;
 
+    private Set<EvseDTO> evses;
+
+    private Set<ChargerDTO> chargers;
+
+    private Set<String> pictures;
 }

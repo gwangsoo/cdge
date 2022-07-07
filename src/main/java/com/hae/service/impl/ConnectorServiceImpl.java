@@ -6,6 +6,8 @@ import com.hae.service.ConnectorService;
 import com.hae.service.dto.ConnectorDTO;
 import com.hae.service.mapper.ConnectorMapper;
 import java.util.Optional;
+
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -18,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Transactional
+@RequiredArgsConstructor
 public class ConnectorServiceImpl implements ConnectorService {
 
     private final Logger log = LoggerFactory.getLogger(ConnectorServiceImpl.class);
@@ -25,11 +28,6 @@ public class ConnectorServiceImpl implements ConnectorService {
     private final ConnectorRepository connectorRepository;
 
     private final ConnectorMapper connectorMapper;
-
-    public ConnectorServiceImpl(ConnectorRepository connectorRepository, ConnectorMapper connectorMapper) {
-        this.connectorRepository = connectorRepository;
-        this.connectorMapper = connectorMapper;
-    }
 
     @Override
     public ConnectorDTO save(ConnectorDTO connectorDTO) {

@@ -73,12 +73,13 @@ class EvseResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Evse createEntity(EntityManager em) {
-        Evse evse = new Evse()
+        Evse evse = Evse.builder()
             .groupName(DEFAULT_GROUP_NAME)
             .available(DEFAULT_AVAILABLE)
             .reservable(DEFAULT_RESERVABLE)
             .oneTimePayment(DEFAULT_ONE_TIME_PAYMENT)
-            .status(DEFAULT_STATUS);
+            .status(DEFAULT_STATUS)
+            .build();
         return evse;
     }
 
@@ -89,12 +90,13 @@ class EvseResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Evse createUpdatedEntity(EntityManager em) {
-        Evse evse = new Evse()
+        Evse evse = Evse.builder()
             .groupName(UPDATED_GROUP_NAME)
             .available(UPDATED_AVAILABLE)
             .reservable(UPDATED_RESERVABLE)
             .oneTimePayment(UPDATED_ONE_TIME_PAYMENT)
-            .status(UPDATED_STATUS);
+            .status(UPDATED_STATUS)
+            .build();
         return evse;
     }
 
@@ -272,12 +274,12 @@ class EvseResourceIT {
         Evse updatedEvse = evseRepository.findById(evse.getId()).get();
         // Disconnect from session so that the updates on updatedEvse are not directly saved in db
         em.detach(updatedEvse);
-        updatedEvse
-            .groupName(UPDATED_GROUP_NAME)
-            .available(UPDATED_AVAILABLE)
-            .reservable(UPDATED_RESERVABLE)
-            .oneTimePayment(UPDATED_ONE_TIME_PAYMENT)
-            .status(UPDATED_STATUS);
+
+        updatedEvse.setGroupName(UPDATED_GROUP_NAME);
+        updatedEvse.setAvailable(UPDATED_AVAILABLE);
+        updatedEvse.setReservable(UPDATED_RESERVABLE);
+        updatedEvse.setOneTimePayment(UPDATED_ONE_TIME_PAYMENT);
+        updatedEvse.setStatus(UPDATED_STATUS);
         EvseDTO evseDTO = evseMapper.toDto(updatedEvse);
 
         restEvseMockMvc
@@ -376,7 +378,10 @@ class EvseResourceIT {
         Evse partialUpdatedEvse = new Evse();
         partialUpdatedEvse.setId(evse.getId());
 
-        partialUpdatedEvse.groupName(UPDATED_GROUP_NAME).available(UPDATED_AVAILABLE).reservable(UPDATED_RESERVABLE).status(UPDATED_STATUS);
+        partialUpdatedEvse.setGroupName(UPDATED_GROUP_NAME);
+        partialUpdatedEvse.setAvailable(UPDATED_AVAILABLE);
+        partialUpdatedEvse.setReservable(UPDATED_RESERVABLE);
+        partialUpdatedEvse.setStatus(UPDATED_STATUS);
 
         restEvseMockMvc
             .perform(
@@ -409,12 +414,11 @@ class EvseResourceIT {
         Evse partialUpdatedEvse = new Evse();
         partialUpdatedEvse.setId(evse.getId());
 
-        partialUpdatedEvse
-            .groupName(UPDATED_GROUP_NAME)
-            .available(UPDATED_AVAILABLE)
-            .reservable(UPDATED_RESERVABLE)
-            .oneTimePayment(UPDATED_ONE_TIME_PAYMENT)
-            .status(UPDATED_STATUS);
+        partialUpdatedEvse.setGroupName(UPDATED_GROUP_NAME);
+        partialUpdatedEvse.setAvailable(UPDATED_AVAILABLE);
+        partialUpdatedEvse.setReservable(UPDATED_RESERVABLE);
+        partialUpdatedEvse.setOneTimePayment(UPDATED_ONE_TIME_PAYMENT);
+        partialUpdatedEvse.setStatus(UPDATED_STATUS);
 
         restEvseMockMvc
             .perform(

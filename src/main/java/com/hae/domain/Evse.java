@@ -6,13 +6,10 @@ import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
 import javax.validation.constraints.*;
+
+import lombok.*;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
 
 /**
  * 충전기
@@ -21,6 +18,7 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Entity
 @Table(name = "tb_cdge_evse")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
@@ -33,16 +31,14 @@ public class Evse extends AbstractAuditingEntity implements Serializable {
      */
     @NotNull
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator")
     @Column(name = "id", nullable = false)
     private Long id;
 
     /**
      * 그룹명
      */
-    @Size(max = 256)
-    @Column(name = "group_name", length = 256)
+    @Size(max = 128)
+    @Column(name = "group_name", length = 128)
     private String groupName;
 
     /**
@@ -73,18 +69,17 @@ public class Evse extends AbstractAuditingEntity implements Serializable {
     @Column(name = "status", nullable = false)
     private Integer status;
 
-    @OneToMany(mappedBy = "evse")
+    @OneToMany(mappedBy = "evseId")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "evse" }, allowSetters = true)
     private Set<Connector> connectors;
 
-    @OneToMany(mappedBy = "evse")
+    @ElementCollection @CollectionTable(name="tb_cdge_evse_pricing", joinColumns = @JoinColumn(name = "evse_id"))
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "evse" }, allowSetters = true)
     private Set<Pricing> pricings;
 
-    @ManyToOne
-    @JsonIgnoreProperties(value = { "evses", "chargers", "pictures" }, allowSetters = true)
-    private Station station;
-
+    /**
+     * 충전소ID
+     */
+    @Column(name = "station_id")
+    private Long stationId;
 }

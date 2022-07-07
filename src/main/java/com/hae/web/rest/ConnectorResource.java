@@ -11,6 +11,8 @@ import java.util.Objects;
 import java.util.Optional;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -30,6 +32,7 @@ import tech.jhipster.web.util.ResponseUtil;
  */
 @RestController
 @RequestMapping("/api")
+@RequiredArgsConstructor
 public class ConnectorResource {
 
     private final Logger log = LoggerFactory.getLogger(ConnectorResource.class);
@@ -42,11 +45,6 @@ public class ConnectorResource {
     private final ConnectorService connectorService;
 
     private final ConnectorRepository connectorRepository;
-
-    public ConnectorResource(ConnectorService connectorService, ConnectorRepository connectorRepository) {
-        this.connectorService = connectorService;
-        this.connectorRepository = connectorRepository;
-    }
 
     /**
      * {@code POST  /connectors} : Create a new connector.

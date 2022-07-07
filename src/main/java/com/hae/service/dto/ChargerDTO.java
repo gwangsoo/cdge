@@ -1,8 +1,10 @@
 package com.hae.service.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
-import java.util.Objects;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,8 +22,8 @@ public class ChargerDTO implements Serializable {
 
     private Long id;
 
-    private MetaDTO meta;
+    private ChargerMetaDTO meta;
 
-    private StationDTO station;
-
+    @JsonIgnore
+    private Long stationId;
 }

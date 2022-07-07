@@ -1,5 +1,8 @@
 package com.hae.service.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.hae.domain.enumeration.ConnectorType;
 import com.hae.domain.enumeration.CurrentType;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -26,6 +29,7 @@ public class ConnectorDTO implements Serializable {
      */
     @NotNull
     @Schema(description = "connectorID", required = true)
+    @JsonProperty("connectorID")
     private Long id;
 
     /**
@@ -62,6 +66,6 @@ public class ConnectorDTO implements Serializable {
     @Schema(description = "상태")
     private String status;
 
-    private EvseDTO evse;
-
+    @JsonIgnore
+    private Long evseId;
 }

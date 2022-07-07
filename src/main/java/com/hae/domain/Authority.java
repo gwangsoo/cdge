@@ -20,7 +20,6 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
  * An authority (a security role) used by Spring Security.
  */
 @Data
-@EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity

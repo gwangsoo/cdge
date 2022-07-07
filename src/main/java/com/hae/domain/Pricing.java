@@ -19,18 +19,11 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table(name = "tb_cdge_pricing")
+@Embeddable
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class Pricing extends AbstractAuditingEntity implements Serializable {
+public class Pricing implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator")
-    @Column(name = "id")
-    private Long id;
 
     /**
      * Translation key for the price name
@@ -59,9 +52,4 @@ public class Pricing extends AbstractAuditingEntity implements Serializable {
     @DecimalMin(value = "0")
     @Column(name = "price_cents_vat", nullable = false)
     private Double priceCentsVat;
-
-    @ManyToOne
-    @JsonIgnoreProperties(value = { "connectors", "pricings", "station" }, allowSetters = true)
-    private Evse evse;
-
 }

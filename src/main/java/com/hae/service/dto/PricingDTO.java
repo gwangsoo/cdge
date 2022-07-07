@@ -1,5 +1,6 @@
 package com.hae.service.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
 import java.util.Objects;
@@ -45,6 +46,6 @@ public class PricingDTO implements Serializable {
     @DecimalMin(value = "0")
     private Double priceCentsVat;
 
-    private EvseDTO evse;
-
+    @JsonIgnore
+    private Long evseId;
 }

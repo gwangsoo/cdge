@@ -6,6 +6,9 @@ import com.hae.service.StationService;
 import com.hae.service.dto.StationDTO;
 import com.hae.service.mapper.StationMapper;
 import java.util.Optional;
+
+import com.hae.util.ObjectSetUtil;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -18,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Transactional
+@RequiredArgsConstructor
 public class StationServiceImpl implements StationService {
 
     private final Logger log = LoggerFactory.getLogger(StationServiceImpl.class);
@@ -25,11 +29,6 @@ public class StationServiceImpl implements StationService {
     private final StationRepository stationRepository;
 
     private final StationMapper stationMapper;
-
-    public StationServiceImpl(StationRepository stationRepository, StationMapper stationMapper) {
-        this.stationRepository = stationRepository;
-        this.stationMapper = stationMapper;
-    }
 
     @Override
     public StationDTO save(StationDTO stationDTO) {
@@ -51,14 +50,15 @@ public class StationServiceImpl implements StationService {
     public Optional<StationDTO> partialUpdate(StationDTO stationDTO) {
         log.debug("Request to partially update Station : {}", stationDTO);
 
+        Station station = stationMapper.toEntity(stationDTO);
+
         return stationRepository
             .findById(stationDTO.getId())
             .map(existingStation -> {
-                stationMapper.partialUpdate(existingStation, stationDTO);
-
+                //stationMapper.partialUpdate(existingStation, stationDTO);
+                ObjectSetUtil.copyProperties(station, existingStation, null, ObjectSetUtil.getNullPropertyNames(existingStation));
                 return existingStation;
             })
-            .map(stationRepository::save)
             .map(stationMapper::toDto);
     }
 

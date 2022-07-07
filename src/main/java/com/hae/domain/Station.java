@@ -7,13 +7,10 @@ import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
 import javax.validation.constraints.*;
+
+import lombok.*;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
 
 /**
  * 충전소
@@ -22,6 +19,7 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Entity
 @Table(name = "tb_cdge_station")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
@@ -34,8 +32,6 @@ public class Station extends AbstractAuditingEntity implements Serializable {
      */
     @NotNull
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator")
     @Column(name = "id", nullable = false)
     private Long id;
 
@@ -48,8 +44,8 @@ public class Station extends AbstractAuditingEntity implements Serializable {
     /**
      * 충전소명
      */
-    @Size(max = 256)
-    @Column(name = "name", length = 256)
+    @Size(max = 128)
+    @Column(name = "name", length = 128)
     private String name;
 
     /**
@@ -117,19 +113,16 @@ public class Station extends AbstractAuditingEntity implements Serializable {
     @Column(name = "is_private")
     private Boolean isPrivate;
 
-    @OneToMany(mappedBy = "station")
+    @OneToMany(mappedBy = "stationId")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "connectors", "pricings", "station" }, allowSetters = true)
     private Set<Evse> evses;
 
-    @OneToMany(mappedBy = "station")
+    @OneToMany(mappedBy = "stationId")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "meta", "station" }, allowSetters = true)
     private Set<Charger> chargers;
 
-    @OneToMany(mappedBy = "station")
+    @ElementCollection @CollectionTable(name="tb_cdge_station_picture", joinColumns = @JoinColumn(name = "station_id"))
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "station" }, allowSetters = true)
-    private Set<Picture> pictures;
+    private Set<String> pictures;
 
 }

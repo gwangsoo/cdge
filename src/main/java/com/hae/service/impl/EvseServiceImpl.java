@@ -6,6 +6,9 @@ import com.hae.service.EvseService;
 import com.hae.service.dto.EvseDTO;
 import com.hae.service.mapper.EvseMapper;
 import java.util.Optional;
+
+import com.hae.util.ObjectSetUtil;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -18,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Transactional
+@RequiredArgsConstructor
 public class EvseServiceImpl implements EvseService {
 
     private final Logger log = LoggerFactory.getLogger(EvseServiceImpl.class);
@@ -25,11 +29,6 @@ public class EvseServiceImpl implements EvseService {
     private final EvseRepository evseRepository;
 
     private final EvseMapper evseMapper;
-
-    public EvseServiceImpl(EvseRepository evseRepository, EvseMapper evseMapper) {
-        this.evseRepository = evseRepository;
-        this.evseMapper = evseMapper;
-    }
 
     @Override
     public EvseDTO save(EvseDTO evseDTO) {
@@ -51,14 +50,15 @@ public class EvseServiceImpl implements EvseService {
     public Optional<EvseDTO> partialUpdate(EvseDTO evseDTO) {
         log.debug("Request to partially update Evse : {}", evseDTO);
 
+        Evse evse = evseMapper.toEntity(evseDTO);
+
         return evseRepository
             .findById(evseDTO.getId())
             .map(existingEvse -> {
-                evseMapper.partialUpdate(existingEvse, evseDTO);
-
+                //evseMapper.partialUpdate(existingEvse, evseDTO);
+                ObjectSetUtil.copyProperties(evse, existingEvse, null, ObjectSetUtil.getNullPropertyNames(existingEvse));
                 return existingEvse;
             })
-            .map(evseRepository::save)
             .map(evseMapper::toDto);
     }
 

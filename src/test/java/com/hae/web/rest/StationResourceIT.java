@@ -95,7 +95,7 @@ class StationResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Station createEntity(EntityManager em) {
-        Station station = new Station()
+        Station station = Station.builder()
             .sellerId(DEFAULT_SELLER_ID)
             .name(DEFAULT_NAME)
             .latitude(DEFAULT_LATITUDE)
@@ -107,7 +107,8 @@ class StationResourceIT {
             .provider(DEFAULT_PROVIDER)
             .alertMessage(DEFAULT_ALERT_MESSAGE)
             .isRemoved(DEFAULT_IS_REMOVED)
-            .isPrivate(DEFAULT_IS_PRIVATE);
+            .isPrivate(DEFAULT_IS_PRIVATE)
+            .build();
         return station;
     }
 
@@ -118,7 +119,7 @@ class StationResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Station createUpdatedEntity(EntityManager em) {
-        Station station = new Station()
+        Station station = Station.builder()
             .sellerId(UPDATED_SELLER_ID)
             .name(UPDATED_NAME)
             .latitude(UPDATED_LATITUDE)
@@ -130,7 +131,8 @@ class StationResourceIT {
             .provider(UPDATED_PROVIDER)
             .alertMessage(UPDATED_ALERT_MESSAGE)
             .isRemoved(UPDATED_IS_REMOVED)
-            .isPrivate(UPDATED_IS_PRIVATE);
+            .isPrivate(UPDATED_IS_PRIVATE)
+            .build();
         return station;
     }
 
@@ -257,19 +259,19 @@ class StationResourceIT {
         Station updatedStation = stationRepository.findById(station.getId()).get();
         // Disconnect from session so that the updates on updatedStation are not directly saved in db
         em.detach(updatedStation);
-        updatedStation
-            .sellerId(UPDATED_SELLER_ID)
-            .name(UPDATED_NAME)
-            .latitude(UPDATED_LATITUDE)
-            .longitide(UPDATED_LONGITIDE)
-            .icon(UPDATED_ICON)
-            .address(UPDATED_ADDRESS)
-            .city(UPDATED_CITY)
-            .openHours(UPDATED_OPEN_HOURS)
-            .provider(UPDATED_PROVIDER)
-            .alertMessage(UPDATED_ALERT_MESSAGE)
-            .isRemoved(UPDATED_IS_REMOVED)
-            .isPrivate(UPDATED_IS_PRIVATE);
+
+        updatedStation.setSellerId(UPDATED_SELLER_ID);
+        updatedStation.setName(UPDATED_NAME);
+        updatedStation.setLatitude(UPDATED_LATITUDE);
+        updatedStation.setLongitide(UPDATED_LONGITIDE);
+        updatedStation.setIcon(UPDATED_ICON);
+        updatedStation.setAddress(UPDATED_ADDRESS);
+        updatedStation.setCity(UPDATED_CITY);
+        updatedStation.setOpenHours(UPDATED_OPEN_HOURS);
+        updatedStation.setProvider(UPDATED_PROVIDER);
+        updatedStation.setAlertMessage(UPDATED_ALERT_MESSAGE);
+        updatedStation.setIsRemoved(UPDATED_IS_REMOVED);
+        updatedStation.setIsPrivate(UPDATED_IS_PRIVATE);
         StationDTO stationDTO = stationMapper.toDto(updatedStation);
 
         restStationMockMvc
@@ -375,13 +377,12 @@ class StationResourceIT {
         Station partialUpdatedStation = new Station();
         partialUpdatedStation.setId(station.getId());
 
-        partialUpdatedStation
-            .sellerId(UPDATED_SELLER_ID)
-            .name(UPDATED_NAME)
-            .latitude(UPDATED_LATITUDE)
-            .longitide(UPDATED_LONGITIDE)
-            .address(UPDATED_ADDRESS)
-            .provider(UPDATED_PROVIDER);
+        partialUpdatedStation.setSellerId(UPDATED_SELLER_ID);
+        partialUpdatedStation.setName(UPDATED_NAME);
+        partialUpdatedStation.setLatitude(UPDATED_LATITUDE);
+        partialUpdatedStation.setLongitide(UPDATED_LONGITIDE);
+        partialUpdatedStation.setAddress(UPDATED_ADDRESS);
+        partialUpdatedStation.setProvider(UPDATED_PROVIDER);
 
         restStationMockMvc
             .perform(
@@ -421,19 +422,18 @@ class StationResourceIT {
         Station partialUpdatedStation = new Station();
         partialUpdatedStation.setId(station.getId());
 
-        partialUpdatedStation
-            .sellerId(UPDATED_SELLER_ID)
-            .name(UPDATED_NAME)
-            .latitude(UPDATED_LATITUDE)
-            .longitide(UPDATED_LONGITIDE)
-            .icon(UPDATED_ICON)
-            .address(UPDATED_ADDRESS)
-            .city(UPDATED_CITY)
-            .openHours(UPDATED_OPEN_HOURS)
-            .provider(UPDATED_PROVIDER)
-            .alertMessage(UPDATED_ALERT_MESSAGE)
-            .isRemoved(UPDATED_IS_REMOVED)
-            .isPrivate(UPDATED_IS_PRIVATE);
+        partialUpdatedStation.setSellerId(UPDATED_SELLER_ID);
+        partialUpdatedStation.setName(UPDATED_NAME);
+        partialUpdatedStation.setLatitude(UPDATED_LATITUDE);
+        partialUpdatedStation.setLongitide(UPDATED_LONGITIDE);
+        partialUpdatedStation.setIcon(UPDATED_ICON);
+        partialUpdatedStation.setAddress(UPDATED_ADDRESS);
+        partialUpdatedStation.setCity(UPDATED_CITY);
+        partialUpdatedStation.setOpenHours(UPDATED_OPEN_HOURS);
+        partialUpdatedStation.setProvider(UPDATED_PROVIDER);
+        partialUpdatedStation.setAlertMessage(UPDATED_ALERT_MESSAGE);
+        partialUpdatedStation.setIsRemoved(UPDATED_IS_REMOVED);
+        partialUpdatedStation.setIsPrivate(UPDATED_IS_PRIVATE);
 
         restStationMockMvc
             .perform(

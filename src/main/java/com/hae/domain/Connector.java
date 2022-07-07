@@ -6,13 +6,10 @@ import com.hae.domain.enumeration.CurrentType;
 import java.io.Serializable;
 import javax.persistence.*;
 import javax.validation.constraints.*;
+
+import lombok.*;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
 
 /**
  * 콘넥터
@@ -21,6 +18,7 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Entity
 @Table(name = "tb_cdge_connector")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
@@ -33,8 +31,6 @@ public class Connector extends AbstractAuditingEntity implements Serializable {
      */
     @NotNull
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator")
     @Column(name = "id", nullable = false)
     private Long id;
 
@@ -74,8 +70,9 @@ public class Connector extends AbstractAuditingEntity implements Serializable {
     @Column(name = "status")
     private String status;
 
-    @ManyToOne
-    @JsonIgnoreProperties(value = { "connectors", "pricings", "station" }, allowSetters = true)
-    private Evse evse;
-
+    /**
+     * Evse ID
+     */
+    @Column(name = "evse_id")
+    private Long evseId;
 }

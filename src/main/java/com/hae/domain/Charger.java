@@ -1,6 +1,5 @@
 package com.hae.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import javax.persistence.*;
 import org.hibernate.annotations.Cache;
@@ -26,18 +25,15 @@ public class Charger extends AbstractAuditingEntity implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
-    @SequenceGenerator(name = "sequenceGenerator")
     @Column(name = "id")
     private Long id;
 
-    @JsonIgnoreProperties(value = { "sockets" }, allowSetters = true)
-    @OneToOne
-    @JoinColumn(unique = true)
-    private Meta meta;
+    @Embedded
+    private ChargerMeta meta;
 
-    @ManyToOne
-    @JsonIgnoreProperties(value = { "evses", "chargers", "pictures" }, allowSetters = true)
-    private Station station;
-
+    /**
+     * 충전소ID
+     */
+    @Column(name = "station_id")
+    private Long stationId;
 }

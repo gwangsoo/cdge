@@ -9,6 +9,8 @@ import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -28,6 +30,7 @@ import tech.jhipster.web.util.ResponseUtil;
  */
 @RestController
 @RequestMapping("/api")
+@RequiredArgsConstructor
 public class ChargerResource {
 
     private final Logger log = LoggerFactory.getLogger(ChargerResource.class);
@@ -40,11 +43,6 @@ public class ChargerResource {
     private final ChargerService chargerService;
 
     private final ChargerRepository chargerRepository;
-
-    public ChargerResource(ChargerService chargerService, ChargerRepository chargerRepository) {
-        this.chargerService = chargerService;
-        this.chargerRepository = chargerRepository;
-    }
 
     /**
      * {@code POST  /chargers} : Create a new charger.

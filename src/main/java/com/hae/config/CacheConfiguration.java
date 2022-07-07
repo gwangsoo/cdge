@@ -1,6 +1,8 @@
 package com.hae.config;
 
 import java.time.Duration;
+
+import com.hae.domain.ChargerMeta;
 import org.ehcache.config.builders.*;
 import org.ehcache.jsr107.Eh107Configuration;
 import org.hibernate.cache.jcache.ConfigSettings;
@@ -54,10 +56,8 @@ public class CacheConfiguration {
             createCache(cm, com.hae.domain.Evse.class.getName() + ".connectors");
             createCache(cm, com.hae.domain.Evse.class.getName() + ".pricings");
             createCache(cm, com.hae.domain.Charger.class.getName());
-            createCache(cm, com.hae.domain.Meta.class.getName());
-            createCache(cm, com.hae.domain.Meta.class.getName() + ".sockets");
-            createCache(cm, com.hae.domain.Socket.class.getName());
-            createCache(cm, com.hae.domain.Picture.class.getName());
+            createCache(cm, ChargerMeta.class.getName());
+            createCache(cm, ChargerMeta.class.getName() + ".sockets");
             createCache(cm, com.hae.domain.Station.class.getName());
             createCache(cm, com.hae.domain.Station.class.getName() + ".evses");
             createCache(cm, com.hae.domain.Station.class.getName() + ".chargers");

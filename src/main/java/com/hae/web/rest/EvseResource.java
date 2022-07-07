@@ -11,6 +11,8 @@ import java.util.Objects;
 import java.util.Optional;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -30,6 +32,7 @@ import tech.jhipster.web.util.ResponseUtil;
  */
 @RestController
 @RequestMapping("/api")
+@RequiredArgsConstructor
 public class EvseResource {
 
     private final Logger log = LoggerFactory.getLogger(EvseResource.class);
@@ -42,11 +45,6 @@ public class EvseResource {
     private final EvseService evseService;
 
     private final EvseRepository evseRepository;
-
-    public EvseResource(EvseService evseService, EvseRepository evseRepository) {
-        this.evseService = evseService;
-        this.evseRepository = evseRepository;
-    }
 
     /**
      * {@code POST  /evses} : Create a new evse.

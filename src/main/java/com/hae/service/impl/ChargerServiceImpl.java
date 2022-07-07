@@ -6,6 +6,9 @@ import com.hae.service.ChargerService;
 import com.hae.service.dto.ChargerDTO;
 import com.hae.service.mapper.ChargerMapper;
 import java.util.Optional;
+
+import com.hae.util.ObjectSetUtil;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -18,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Transactional
+@RequiredArgsConstructor
 public class ChargerServiceImpl implements ChargerService {
 
     private final Logger log = LoggerFactory.getLogger(ChargerServiceImpl.class);
@@ -25,11 +29,6 @@ public class ChargerServiceImpl implements ChargerService {
     private final ChargerRepository chargerRepository;
 
     private final ChargerMapper chargerMapper;
-
-    public ChargerServiceImpl(ChargerRepository chargerRepository, ChargerMapper chargerMapper) {
-        this.chargerRepository = chargerRepository;
-        this.chargerMapper = chargerMapper;
-    }
 
     @Override
     public ChargerDTO save(ChargerDTO chargerDTO) {
@@ -51,14 +50,15 @@ public class ChargerServiceImpl implements ChargerService {
     public Optional<ChargerDTO> partialUpdate(ChargerDTO chargerDTO) {
         log.debug("Request to partially update Charger : {}", chargerDTO);
 
+        Charger charger = chargerMapper.toEntity(chargerDTO);
+
         return chargerRepository
             .findById(chargerDTO.getId())
             .map(existingCharger -> {
-                chargerMapper.partialUpdate(existingCharger, chargerDTO);
-
+                //chargerMapper.partialUpdate(existingCharger, chargerDTO);
+                ObjectSetUtil.copyProperties(charger, existingCharger, null, ObjectSetUtil.getNullPropertyNames(existingCharger));
                 return existingCharger;
             })
-            .map(chargerRepository::save)
             .map(chargerMapper::toDto);
     }
 

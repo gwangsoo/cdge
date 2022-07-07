@@ -75,12 +75,13 @@ class ConnectorResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Connector createEntity(EntityManager em) {
-        Connector connector = new Connector()
+        Connector connector = Connector.builder()
             .type(DEFAULT_TYPE)
             .maxKwh(DEFAULT_MAX_KWH)
             .maxKw(DEFAULT_MAX_KW)
             .currentType(DEFAULT_CURRENT_TYPE)
-            .status(DEFAULT_STATUS);
+            .status(DEFAULT_STATUS)
+            .build();
         return connector;
     }
 
@@ -91,12 +92,13 @@ class ConnectorResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Connector createUpdatedEntity(EntityManager em) {
-        Connector connector = new Connector()
+        Connector connector = Connector.builder()
             .type(UPDATED_TYPE)
             .maxKwh(UPDATED_MAX_KWH)
             .maxKw(UPDATED_MAX_KW)
             .currentType(UPDATED_CURRENT_TYPE)
-            .status(UPDATED_STATUS);
+            .status(UPDATED_STATUS)
+            .build();
         return connector;
     }
 
@@ -238,12 +240,11 @@ class ConnectorResourceIT {
         Connector updatedConnector = connectorRepository.findById(connector.getId()).get();
         // Disconnect from session so that the updates on updatedConnector are not directly saved in db
         em.detach(updatedConnector);
-        updatedConnector
-            .type(UPDATED_TYPE)
-            .maxKwh(UPDATED_MAX_KWH)
-            .maxKw(UPDATED_MAX_KW)
-            .currentType(UPDATED_CURRENT_TYPE)
-            .status(UPDATED_STATUS);
+        updatedConnector.setType(UPDATED_TYPE);
+        updatedConnector.setMaxKwh(UPDATED_MAX_KWH);
+        updatedConnector.setMaxKw(UPDATED_MAX_KW);
+        updatedConnector.setCurrentType(UPDATED_CURRENT_TYPE);
+        updatedConnector.setStatus(UPDATED_STATUS);
         ConnectorDTO connectorDTO = connectorMapper.toDto(updatedConnector);
 
         restConnectorMockMvc
@@ -342,7 +343,10 @@ class ConnectorResourceIT {
         Connector partialUpdatedConnector = new Connector();
         partialUpdatedConnector.setId(connector.getId());
 
-        partialUpdatedConnector.type(UPDATED_TYPE).maxKwh(UPDATED_MAX_KWH).maxKw(UPDATED_MAX_KW).status(UPDATED_STATUS);
+        partialUpdatedConnector.setType(UPDATED_TYPE);
+        partialUpdatedConnector.setMaxKwh(UPDATED_MAX_KWH);
+        partialUpdatedConnector.setMaxKw(UPDATED_MAX_KW);
+        partialUpdatedConnector.setStatus(UPDATED_STATUS);
 
         restConnectorMockMvc
             .perform(
@@ -375,12 +379,11 @@ class ConnectorResourceIT {
         Connector partialUpdatedConnector = new Connector();
         partialUpdatedConnector.setId(connector.getId());
 
-        partialUpdatedConnector
-            .type(UPDATED_TYPE)
-            .maxKwh(UPDATED_MAX_KWH)
-            .maxKw(UPDATED_MAX_KW)
-            .currentType(UPDATED_CURRENT_TYPE)
-            .status(UPDATED_STATUS);
+        partialUpdatedConnector.setType(UPDATED_TYPE);
+        partialUpdatedConnector.setMaxKwh(UPDATED_MAX_KWH);
+        partialUpdatedConnector.setMaxKw(UPDATED_MAX_KW);
+        partialUpdatedConnector.setCurrentType(UPDATED_CURRENT_TYPE);
+        partialUpdatedConnector.setStatus(UPDATED_STATUS);
 
         restConnectorMockMvc
             .perform(
