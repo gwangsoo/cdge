@@ -4,11 +4,19 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
 import java.util.Objects;
 import javax.validation.constraints.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * A DTO for the {@link com.hae.domain.Evse} entity.
  */
 @Schema(description = "충전기")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class EvseDTO implements Serializable {
 
     /**
@@ -58,94 +66,4 @@ public class EvseDTO implements Serializable {
 
     private StationDTO station;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getGroupName() {
-        return groupName;
-    }
-
-    public void setGroupName(String groupName) {
-        this.groupName = groupName;
-    }
-
-    public Boolean getAvailable() {
-        return available;
-    }
-
-    public void setAvailable(Boolean available) {
-        this.available = available;
-    }
-
-    public Boolean getReservable() {
-        return reservable;
-    }
-
-    public void setReservable(Boolean reservable) {
-        this.reservable = reservable;
-    }
-
-    public Boolean getOneTimePayment() {
-        return oneTimePayment;
-    }
-
-    public void setOneTimePayment(Boolean oneTimePayment) {
-        this.oneTimePayment = oneTimePayment;
-    }
-
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
-
-    public StationDTO getStation() {
-        return station;
-    }
-
-    public void setStation(StationDTO station) {
-        this.station = station;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof EvseDTO)) {
-            return false;
-        }
-
-        EvseDTO evseDTO = (EvseDTO) o;
-        if (this.id == null) {
-            return false;
-        }
-        return Objects.equals(this.id, evseDTO.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(this.id);
-    }
-
-    // prettier-ignore
-    @Override
-    public String toString() {
-        return "EvseDTO{" +
-            "id=" + getId() +
-            ", groupName='" + getGroupName() + "'" +
-            ", available='" + getAvailable() + "'" +
-            ", reservable='" + getReservable() + "'" +
-            ", oneTimePayment='" + getOneTimePayment() + "'" +
-            ", status=" + getStatus() +
-            ", station=" + getStation() +
-            "}";
-    }
 }

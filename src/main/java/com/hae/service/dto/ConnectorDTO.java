@@ -6,11 +6,19 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
 import java.util.Objects;
 import javax.validation.constraints.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * A DTO for the {@link com.hae.domain.Connector} entity.
  */
 @Schema(description = "콘넥터")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class ConnectorDTO implements Serializable {
 
     /**
@@ -56,94 +64,4 @@ public class ConnectorDTO implements Serializable {
 
     private EvseDTO evse;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public ConnectorType getType() {
-        return type;
-    }
-
-    public void setType(ConnectorType type) {
-        this.type = type;
-    }
-
-    public Double getMaxKwh() {
-        return maxKwh;
-    }
-
-    public void setMaxKwh(Double maxKwh) {
-        this.maxKwh = maxKwh;
-    }
-
-    public Double getMaxKw() {
-        return maxKw;
-    }
-
-    public void setMaxKw(Double maxKw) {
-        this.maxKw = maxKw;
-    }
-
-    public CurrentType getCurrentType() {
-        return currentType;
-    }
-
-    public void setCurrentType(CurrentType currentType) {
-        this.currentType = currentType;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public EvseDTO getEvse() {
-        return evse;
-    }
-
-    public void setEvse(EvseDTO evse) {
-        this.evse = evse;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof ConnectorDTO)) {
-            return false;
-        }
-
-        ConnectorDTO connectorDTO = (ConnectorDTO) o;
-        if (this.id == null) {
-            return false;
-        }
-        return Objects.equals(this.id, connectorDTO.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(this.id);
-    }
-
-    // prettier-ignore
-    @Override
-    public String toString() {
-        return "ConnectorDTO{" +
-            "id=" + getId() +
-            ", type='" + getType() + "'" +
-            ", maxKwh=" + getMaxKwh() +
-            ", maxKw=" + getMaxKw() +
-            ", currentType='" + getCurrentType() + "'" +
-            ", status='" + getStatus() + "'" +
-            ", evse=" + getEvse() +
-            "}";
-    }
 }

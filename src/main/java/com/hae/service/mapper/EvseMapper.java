@@ -9,13 +9,5 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity {@link Evse} and its DTO {@link EvseDTO}.
  */
-@Mapper(componentModel = "spring")
-public interface EvseMapper extends EntityMapper<EvseDTO, Evse> {
-    @Mapping(target = "station", source = "station", qualifiedByName = "stationId")
-    EvseDTO toDto(Evse s);
-
-    @Named("stationId")
-    @BeanMapping(ignoreByDefault = true)
-    @Mapping(target = "id", source = "id")
-    StationDTO toDtoStationId(Station station);
-}
+@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
+public interface EvseMapper extends EntityMapper<EvseDTO, Evse> {}

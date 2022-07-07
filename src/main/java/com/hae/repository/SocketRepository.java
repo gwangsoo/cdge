@@ -9,4 +9,4 @@ import org.springframework.stereotype.Repository;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface SocketRepository extends JpaRepository<Socket, Long> {}
+public interface SocketRepository extends JpaRepository<Socket, Long>, JpaSpecificationExecutor<Socket> {}

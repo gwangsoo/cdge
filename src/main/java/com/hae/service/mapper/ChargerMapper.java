@@ -11,19 +11,5 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity {@link Charger} and its DTO {@link ChargerDTO}.
  */
-@Mapper(componentModel = "spring")
-public interface ChargerMapper extends EntityMapper<ChargerDTO, Charger> {
-    @Mapping(target = "meta", source = "meta", qualifiedByName = "metaId")
-    @Mapping(target = "station", source = "station", qualifiedByName = "stationId")
-    ChargerDTO toDto(Charger s);
-
-    @Named("metaId")
-    @BeanMapping(ignoreByDefault = true)
-    @Mapping(target = "id", source = "id")
-    MetaDTO toDtoMetaId(Meta meta);
-
-    @Named("stationId")
-    @BeanMapping(ignoreByDefault = true)
-    @Mapping(target = "id", source = "id")
-    StationDTO toDtoStationId(Station station);
-}
+@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
+public interface ChargerMapper extends EntityMapper<ChargerDTO, Charger> {}

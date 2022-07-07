@@ -5,11 +5,19 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
 import java.util.Objects;
 import javax.validation.constraints.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * A DTO for the {@link com.hae.domain.Station} entity.
  */
 @Schema(description = "충전소")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class StationDTO implements Serializable {
 
     /**
@@ -96,148 +104,4 @@ public class StationDTO implements Serializable {
     @Schema(description = "사적이용여부")
     private Boolean isPrivate;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Integer getSellerId() {
-        return sellerId;
-    }
-
-    public void setSellerId(Integer sellerId) {
-        this.sellerId = sellerId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Double getLatitude() {
-        return latitude;
-    }
-
-    public void setLatitude(Double latitude) {
-        this.latitude = latitude;
-    }
-
-    public Double getLongitide() {
-        return longitide;
-    }
-
-    public void setLongitide(Double longitide) {
-        this.longitide = longitide;
-    }
-
-    public Integer getIcon() {
-        return icon;
-    }
-
-    public void setIcon(Integer icon) {
-        this.icon = icon;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getOpenHours() {
-        return openHours;
-    }
-
-    public void setOpenHours(String openHours) {
-        this.openHours = openHours;
-    }
-
-    public Provider getProvider() {
-        return provider;
-    }
-
-    public void setProvider(Provider provider) {
-        this.provider = provider;
-    }
-
-    public String getAlertMessage() {
-        return alertMessage;
-    }
-
-    public void setAlertMessage(String alertMessage) {
-        this.alertMessage = alertMessage;
-    }
-
-    public Boolean getIsRemoved() {
-        return isRemoved;
-    }
-
-    public void setIsRemoved(Boolean isRemoved) {
-        this.isRemoved = isRemoved;
-    }
-
-    public Boolean getIsPrivate() {
-        return isPrivate;
-    }
-
-    public void setIsPrivate(Boolean isPrivate) {
-        this.isPrivate = isPrivate;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof StationDTO)) {
-            return false;
-        }
-
-        StationDTO stationDTO = (StationDTO) o;
-        if (this.id == null) {
-            return false;
-        }
-        return Objects.equals(this.id, stationDTO.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(this.id);
-    }
-
-    // prettier-ignore
-    @Override
-    public String toString() {
-        return "StationDTO{" +
-            "id=" + getId() +
-            ", sellerId=" + getSellerId() +
-            ", name='" + getName() + "'" +
-            ", latitude=" + getLatitude() +
-            ", longitide=" + getLongitide() +
-            ", icon=" + getIcon() +
-            ", address='" + getAddress() + "'" +
-            ", city='" + getCity() + "'" +
-            ", openHours='" + getOpenHours() + "'" +
-            ", provider='" + getProvider() + "'" +
-            ", alertMessage='" + getAlertMessage() + "'" +
-            ", isRemoved='" + getIsRemoved() + "'" +
-            ", isPrivate='" + getIsPrivate() + "'" +
-            "}";
-    }
 }

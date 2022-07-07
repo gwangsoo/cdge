@@ -9,4 +9,4 @@ import org.springframework.stereotype.Repository;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface EvseRepository extends JpaRepository<Evse, Long> {}
+public interface EvseRepository extends JpaRepository<Evse, Long>, JpaSpecificationExecutor<Evse> {}

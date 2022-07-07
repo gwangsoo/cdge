@@ -9,13 +9,5 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity {@link Picture} and its DTO {@link PictureDTO}.
  */
-@Mapper(componentModel = "spring")
-public interface PictureMapper extends EntityMapper<PictureDTO, Picture> {
-    @Mapping(target = "station", source = "station", qualifiedByName = "stationId")
-    PictureDTO toDto(Picture s);
-
-    @Named("stationId")
-    @BeanMapping(ignoreByDefault = true)
-    @Mapping(target = "id", source = "id")
-    StationDTO toDtoStationId(Station station);
-}
+@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
+public interface PictureMapper extends EntityMapper<PictureDTO, Picture> {}

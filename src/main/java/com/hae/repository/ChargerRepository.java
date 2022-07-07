@@ -9,4 +9,4 @@ import org.springframework.stereotype.Repository;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface ChargerRepository extends JpaRepository<Charger, Long> {}
+public interface ChargerRepository extends JpaRepository<Charger, Long>, JpaSpecificationExecutor<Charger> {}

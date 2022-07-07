@@ -5,11 +5,20 @@ import com.hae.domain.enumeration.ChargerStatus;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
 import java.util.Objects;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 
 /**
  * A DTO for the {@link com.hae.domain.Meta} entity.
  */
 @Schema(description = "Meta정보")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class MetaDTO implements Serializable {
 
     private Long id;
@@ -32,67 +41,4 @@ public class MetaDTO implements Serializable {
     @Schema(description = "State the station is currently")
     private ChargerStatus status;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Boolean getActive() {
-        return active;
-    }
-
-    public void setActive(Boolean active) {
-        this.active = active;
-    }
-
-    public Availability getAvailability() {
-        return availability;
-    }
-
-    public void setAvailability(Availability availability) {
-        this.availability = availability;
-    }
-
-    public ChargerStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(ChargerStatus status) {
-        this.status = status;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof MetaDTO)) {
-            return false;
-        }
-
-        MetaDTO metaDTO = (MetaDTO) o;
-        if (this.id == null) {
-            return false;
-        }
-        return Objects.equals(this.id, metaDTO.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(this.id);
-    }
-
-    // prettier-ignore
-    @Override
-    public String toString() {
-        return "MetaDTO{" +
-            "id=" + getId() +
-            ", active='" + getActive() + "'" +
-            ", availability='" + getAvailability() + "'" +
-            ", status='" + getStatus() + "'" +
-            "}";
-    }
 }
