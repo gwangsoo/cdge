@@ -11,7 +11,7 @@
     -->
     <changeSet id="20220706083335-1" author="jhipster">
         <createTable tableName="tb_cdge_evse" remarks="충전기">
-            <column name="id" type="bigint">
+            <column name="id" type="bigint" remarks="id">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="group_name" type="varchar(256)" remarks="그룹명">

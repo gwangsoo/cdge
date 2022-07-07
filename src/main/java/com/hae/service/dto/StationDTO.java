@@ -12,6 +12,11 @@ import javax.validation.constraints.*;
 @Schema(description = "충전소")
 public class StationDTO implements Serializable {
 
+    /**
+     * id
+     */
+    @NotNull
+    @Schema(description = "id", required = true)
     private Long id;
 
     /**

@@ -11,6 +11,11 @@ import javax.validation.constraints.*;
 @Schema(description = "충전기")
 public class EvseDTO implements Serializable {
 
+    /**
+     * id
+     */
+    @NotNull
+    @Schema(description = "id", required = true)
     private Long id;
 
     /**
