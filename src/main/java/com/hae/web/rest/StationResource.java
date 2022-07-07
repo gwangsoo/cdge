@@ -24,9 +24,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import tech.jhipster.web.util.HeaderUtil;
-import tech.jhipster.web.util.PaginationUtil;
-import tech.jhipster.web.util.ResponseUtil;
+import com.hae.util.HeaderUtil;
+import com.hae.util.PaginationUtil;
+import com.hae.util.ResponseUtil;
 
 /**
  * REST controller for managing {@link com.hae.domain.Station}.
@@ -40,7 +40,7 @@ public class StationResource {
 
     private static final String ENTITY_NAME = "station";
 
-    @Value("${jhipster.clientApp.name}")
+    @Value("${spring.application.name}")
     private String applicationName;
 
     private final StationService stationService;
