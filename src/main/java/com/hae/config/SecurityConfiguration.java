@@ -2,6 +2,7 @@ package com.hae.config;
 
 import com.hae.security.*;
 import com.hae.security.jwt.*;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpMethod;
@@ -9,6 +10,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -23,7 +25,8 @@ import tech.jhipster.config.JHipsterProperties;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
 @Import(SecurityProblemSupport.class)
-public class SecurityConfiguration {
+@RequiredArgsConstructor
+public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private final JHipsterProperties jHipsterProperties;
 
@@ -32,40 +35,49 @@ public class SecurityConfiguration {
     private final CorsFilter corsFilter;
     private final SecurityProblemSupport problemSupport;
 
-    public SecurityConfiguration(
-        TokenProvider tokenProvider,
-        CorsFilter corsFilter,
-        JHipsterProperties jHipsterProperties,
-        SecurityProblemSupport problemSupport
-    ) {
-        this.tokenProvider = tokenProvider;
-        this.corsFilter = corsFilter;
-        this.problemSupport = problemSupport;
-        this.jHipsterProperties = jHipsterProperties;
-    }
+//    public SecurityConfiguration(
+//        TokenProvider tokenProvider,
+//        CorsFilter corsFilter,
+//        JHipsterProperties jHipsterProperties,
+//        SecurityProblemSupport problemSupport
+//    ) {
+//        this.tokenProvider = tokenProvider;
+//        this.corsFilter = corsFilter;
+//        this.problemSupport = problemSupport;
+//        this.jHipsterProperties = jHipsterProperties;
+//    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
-    @Bean
-    public WebSecurityCustomizer webSecurityCustomizer() {
-        return web ->
-            web
-                .ignoring()
-                .antMatchers(HttpMethod.OPTIONS, "/**")
-                .antMatchers("/h2-console/**")
-                .antMatchers("/swagger-ui/**")
-                .antMatchers("/test/**");
+//    @Bean
+//    public WebSecurityCustomizer webSecurityCustomizer() {
+//        return web ->
+//            web
+//                .ignoring()
+//                .antMatchers(HttpMethod.OPTIONS, "/**")
+//                .antMatchers("/h2-console/**")
+//                .antMatchers("/swagger-ui/**")
+//                .antMatchers("/test/**");
+//    }
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http
+            .csrf().disable() // swagger API 호출시 403 에러 발생 방지
+            .authorizeRequests()
+            .anyRequest().permitAll()
+            ;
     }
 
-    @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        // @formatter:off
-        http
-            .csrf()
-            .disable()
+//    @Bean
+//    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+//        // @formatter:off
+//        http
+//            .csrf()
+//            .disable()
 //            .addFilterBefore(corsFilter, UsernamePasswordAuthenticationFilter.class)
 //            .exceptionHandling()
 //                .authenticationEntryPoint(problemSupport)
@@ -84,8 +96,7 @@ public class SecurityConfiguration {
 //            .sessionManagement()
 //            .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 //        .and()
-            .authorizeRequests()
-            .anyRequest().permitAll()
+//            .authorizeRequests()
 //            .antMatchers("/**").permitAll()
 //            .antMatchers("/api/authenticate").permitAll()
 //            .antMatchers("/api/register").permitAll()
@@ -103,12 +114,11 @@ public class SecurityConfiguration {
 //            .httpBasic()
 //        .and()
 //            .apply(securityConfigurerAdapter());
-        ;
-        return http.build();
-        // @formatter:on
-    }
+//        return http.build();
+//        // @formatter:on
+//    }
 
-    private JWTConfigurer securityConfigurerAdapter() {
-        return new JWTConfigurer(tokenProvider);
-    }
+//    private JWTConfigurer securityConfigurerAdapter() {
+//        return new JWTConfigurer(tokenProvider);
+//    }
 }
