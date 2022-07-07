@@ -6,6 +6,12 @@
   "entityTableName": "tb_cdge_station",
   "fields": [
     {
+      "fieldName": "id",
+      "fieldType": "Long",
+      "fieldValidateRules": ["required"],
+      "javadoc": "id"
+    },
+    {
       "fieldName": "sellerId",
       "fieldType": "Integer",
       "javadoc": "판매자ID"

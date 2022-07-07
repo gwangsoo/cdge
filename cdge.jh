@@ -39,6 +39,8 @@ enum CurrentType {
 
 /** 콘넥터 */
 entity Connector (tb_cdge_connector) {
+  /** connectorID */
+  id Long required
   /** 콘넥터 유형 (Mennekes) */
   type ConnectorType required
   /** 최대소비전력량 (18) */
@@ -71,6 +73,8 @@ enum EvseStatus {
 
 /** 충전기 */
 entity Evse (tb_cdge_evse) {
+  /** id */
+  id Long required
   /** 그룹명 */
   groupName String maxlength(256)
   /** 사용가능여부 Whether this EVSE is available for usage */
@@ -130,6 +134,8 @@ enum Provider {
 
 /** 충전소 */
 entity Station (tb_cdge_station) {
+  /** id */
+  id Long required
   /** 판매자ID */
   sellerId Integer
   /** 충전소명 */

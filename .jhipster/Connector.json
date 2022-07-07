@@ -6,6 +6,12 @@
   "entityTableName": "tb_cdge_connector",
   "fields": [
     {
+      "fieldName": "id",
+      "fieldType": "Long",
+      "fieldValidateRules": ["required"],
+      "javadoc": "connectorID"
+    },
+    {
       "fieldName": "type",
       "fieldType": "ConnectorType",
       "fieldTypeJavadoc": "콘넥터 유형",

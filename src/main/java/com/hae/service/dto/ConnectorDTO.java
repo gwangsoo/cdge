@@ -13,6 +13,11 @@ import javax.validation.constraints.*;
 @Schema(description = "콘넥터")
 public class ConnectorDTO implements Serializable {
 
+    /**
+     * connectorID
+     */
+    @NotNull
+    @Schema(description = "connectorID", required = true)
     private Long id;
 
     /**

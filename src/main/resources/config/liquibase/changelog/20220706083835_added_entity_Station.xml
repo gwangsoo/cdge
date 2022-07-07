@@ -11,7 +11,7 @@
     -->
     <changeSet id="20220706083835-1" author="jhipster">
         <createTable tableName="tb_cdge_station" remarks="충전소">
-            <column name="id" type="bigint">
+            <column name="id" type="bigint" remarks="id">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="seller_id" type="integer" remarks="판매자ID">
