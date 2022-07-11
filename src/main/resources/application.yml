@@ -5,12 +5,12 @@ spring:
 server:
     port: 9080
 
-management.endpoints.web.exposure.include: '*'
-management.endpoint.health.show-details: always
-
-management.health.diskspace.enabled: false
-management.health.circuitbreakers.enabled: true
-management.health.ratelimiters.enabled: false
+#management.endpoints.web.exposure.include: '*'
+#management.endpoint.health.show-details: always
+#
+#management.health.diskspace.enabled: false
+#management.health.circuitbreakers.enabled: true
+#management.health.ratelimiters.enabled: false
 
 info:
     name: ${spring.application.name}
@@ -18,9 +18,9 @@ info:
     environment: ${spring.profiles.active}
     version: 0.0.1
 
-management.metrics.tags.application: ${spring.application.name}
-management.metrics.distribution.percentiles-histogram.http.server.requests: true
-management.metrics.distribution.percentiles-histogram.resilience4j.circuitbreaker.calls: true
+#management.metrics.tags.application: ${spring.application.name}
+#management.metrics.distribution.percentiles-histogram.http.server.requests: true
+#management.metrics.distribution.percentiles-histogram.resilience4j.circuitbreaker.calls: true
 
 #resilience4j.circuitbreaker.metrics.use_legacy_binder: true
 
@@ -50,6 +50,8 @@ resilience4j.circuitbreaker:
             ignoreExceptions:
                 - io.github.robwin.exception.BusinessException
     instances:
+        cdgeClient:
+            baseConfig: default
         backendA:
             baseConfig: default
         backendB:
@@ -73,6 +75,8 @@ resilience4j.retry:
             ignoreExceptions:
                 - io.github.robwin.exception.BusinessException
     instances:
+        cdgeClient:
+            baseConfig: default
         backendA:
             baseConfig: default
         backendB:
@@ -82,6 +86,8 @@ resilience4j.bulkhead:
         default:
             maxConcurrentCalls: 100
     instances:
+        cdgeClient:
+            baseConfig: default
         backendA:
             maxConcurrentCalls: 10
         backendB:
@@ -95,6 +101,8 @@ resilience4j.thread-pool-bulkhead:
             coreThreadPoolSize: 2
             queueCapacity: 2
     instances:
+        cdgeClient:
+            baseConfig: default
         backendA:
             baseConfig: default
         backendB:
@@ -111,6 +119,8 @@ resilience4j.ratelimiter:
             timeoutDuration: 0
             eventConsumerBufferSize: 100
     instances:
+        cdgeClient:
+            baseConfig: default
         backendA:
             baseConfig: default
         backendB:
@@ -124,7 +134,14 @@ resilience4j.timelimiter:
             cancelRunningFuture: false
             timeoutDuration: 2s
     instances:
+        cdgeClient:
+            baseConfig: default
         backendA:
             baseConfig: default
         backendB:
             baseConfig: default
+
+
+logging:
+    level:
+        root: debug

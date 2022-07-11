@@ -1,6 +1,6 @@
 buildscript {
 	ext {
-		springBootVersion = '2.5.2'
+		springBootVersion = '2.6.9'
 	}
 	repositories {
 		mavenCentral()
@@ -15,7 +15,7 @@ apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 
-sourceCompatibility = 1.8
+sourceCompatibility = 11
 
 repositories {
 	mavenCentral()
@@ -27,7 +27,8 @@ configurations.all {
 }
 
 ext{
-	resilience4jVersion = '1.7.1'
+	resilience4jVersion = '1.7.0'
+	springCloudVersion = '2021.0.3'
 }
 
 test {
@@ -36,17 +37,35 @@ test {
 
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-webflux')
-	compile('org.springframework.boot:spring-boot-starter-actuator')
+//	compile('org.springframework.boot:spring-boot-starter-actuator')
 	compile('org.springframework.boot:spring-boot-starter-aop')
 
 	compile("io.github.resilience4j:resilience4j-spring-boot2:${resilience4jVersion}")
 	compile("io.github.resilience4j:resilience4j-all:${resilience4jVersion}") // Optional, only required when you want to use the Decorators class
 	compile("io.github.resilience4j:resilience4j-reactor:${resilience4jVersion}")
-	compile("io.micrometer:micrometer-registry-prometheus")
+	compile("io.github.resilience4j:resilience4j-feign:${resilience4jVersion}")
+	compile("org.springframework.cloud:spring-cloud-starter-openfeign")
+//	compile("io.micrometer:micrometer-registry-prometheus")
 
 	compile 'de.codecentric:chaos-monkey-spring-boot:2.1.1'
-	
+
 	compile("io.vavr:vavr-jackson:0.10.0")
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 	testCompile('io.projectreactor:reactor-test')
+
+
+
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+
+	// http://localhost:8080/swagger-ui/index.html
+	implementation 'io.springfox:springfox-boot-starter:3.0.0'
+}
+
+dependencyManagement {
+	imports {
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+	}
 }
