@@ -44,7 +44,9 @@ dependencies {
 	compile("io.github.resilience4j:resilience4j-all:${resilience4jVersion}") // Optional, only required when you want to use the Decorators class
 	compile("io.github.resilience4j:resilience4j-reactor:${resilience4jVersion}")
 	compile("io.github.resilience4j:resilience4j-feign:${resilience4jVersion}")
-	compile("org.springframework.cloud:spring-cloud-starter-openfeign")
+//	compile("org.springframework.cloud:spring-cloud-starter-openfeign")
+	implementation("io.github.openfeign:feign-core")
+	implementation("io.github.openfeign:feign-jackson")
 //	compile("io.micrometer:micrometer-registry-prometheus")
 
 	compile 'de.codecentric:chaos-monkey-spring-boot:2.1.1'

@@ -1,6 +1,7 @@
 spring:
     application.name: resilience4j-demo
-    jackson.serialization.indent_output: true
+    jackson.serialization:
+          indent-output: true
 
 server:
     port: 9080
@@ -140,7 +141,6 @@ resilience4j.timelimiter:
             baseConfig: default
         backendB:
             baseConfig: default
-
 
 logging:
     level:

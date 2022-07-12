@@ -1,15 +1,15 @@
 package io.github.robwin.service;
 
-import feign.FeignException;
-import feign.Param;
+import feign.jackson.JacksonDecoder;
+import feign.jackson.JacksonEncoder;
 import io.github.resilience4j.circuitbreaker.CircuitBreaker;
 import io.github.resilience4j.feign.FeignDecorators;
 import io.github.resilience4j.feign.Resilience4jFeign;
 import io.github.resilience4j.ratelimiter.RateLimiter;
 import io.github.robwin.service.dto.AuthRequestDTO;
 import io.github.robwin.service.dto.AuthResultDTO;
+import io.github.robwin.util.JsonUtil;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 @Service
 public class CdgService {
@@ -27,11 +27,15 @@ public class CdgService {
                 .withRateLimiter(rateLimiter)
 //                .withFallback()
                 .build();
-        cdgeClient = Resilience4jFeign.builder(decorators).target(CdgeClient.class, "https://api.test.virta.global/customer");
+
+        cdgeClient = Resilience4jFeign.builder(decorators)
+                .encoder(new JacksonEncoder())
+                .decoder(new JacksonDecoder())
+                .target(CdgeClient.class, "https://api.test.virta.global/customer");
     }
 
-    public AuthResultDTO auth(String apiKey, String email, String code) {
-        return cdgeClient.auth(apiKey, AuthRequestDTO.builder().email(email).code(code).build())
+    public AuthResultDTO auth(String apiKey, AuthRequestDTO authRequestDTO) {
+        return cdgeClient.auth(apiKey, authRequestDTO)
                 .block();
     }
 }
