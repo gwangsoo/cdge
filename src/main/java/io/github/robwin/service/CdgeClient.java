@@ -16,7 +16,7 @@ import reactor.core.publisher.Mono;
 @Headers({"x-api-key: {apiKey}", "Content-Type: application/json"})
 public interface CdgeClient {
     @RequestLine("POST /auth")
-    Mono<AuthResultDTO> auth(@Param("apiKey") String apiKey, @RequestBody AuthRequestDTO authRequestDTO);
+    AuthResultDTO auth(@Param("apiKey") String apiKey, @RequestBody AuthRequestDTO authRequestDTO);
 
     @RequestLine("GET /auth/refresh")
     @Headers("Authorization: Bearer {accessToken}")

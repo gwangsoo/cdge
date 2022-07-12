@@ -142,6 +142,15 @@ resilience4j.timelimiter:
         backendB:
             baseConfig: default
 
-logging:
-    level:
-        root: debug
+#logging:
+#    level:
+#        root: info
+
+charging:
+    cpo:
+        cdge:
+            name: cdgeClient
+            uri: "https://api.test.virta.global/customer"
+            api-key: 1234
+            user: test
+            password: password
