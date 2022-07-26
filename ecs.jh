@@ -1,0 +1,51 @@
+application {
+  config {
+    applicationType monolith
+    authenticationType jwt
+    baseName ecs
+    buildTool gradle
+    enableSwaggerCodegen true
+    languages [en,ko]
+    nativeLanguage ko
+    packageName com.hae.ecs.domain.charging
+    devDatabaseType h2Memory
+    prodDatabaseType mariadb
+    clientFramework vue
+    skipClient true
+  }
+  entities *
+  dto * with mapstruct
+  service * with serviceImpl
+  paginate * with infinite-scroll
+}
+
+/** 통합 충전소 상태 */
+enum ChargingStatus {
+    CHARGING,
+    OUTOFORDER,
+    AVAILABLE
+}
+
+/** 통합 충전소 정보 */
+entity ChargingUseDisplay(tb_chrging_use_display) {
+    locationId           String maxlength(40) required
+    evseId               String maxlength(50) required
+    connectorId          String maxlength(40) required
+
+    possibleCharingFlag Boolean required
+    insteadCharing       String maxlength(10)
+    name                  String maxlength(255)
+    latitude              String maxlength(10)
+    longitude             String maxlength(11)
+    address               String maxlength(50) required
+    city                  String maxlength(50) required
+    postalCode           String maxlength(10)
+    openingTimes         String maxlength(255)
+    status                ChargingStatus,
+    cpoName              String maxlength(20) required
+    powerType            String maxlength(5) required
+    price                 Integer required
+    vat                   Integer
+    phoneNumber          String maxlength(20) required
+    paymentMethod        String maxlength(30) required
+}

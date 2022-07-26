@@ -18,7 +18,7 @@ logging:
     ROOT: DEBUG
     tech.jhipster: DEBUG
     org.hibernate.SQL: DEBUG
-    com.hae: DEBUG
+    com.hae.ecs.domain.charging: DEBUG
 
 spring:
   devtools:
@@ -58,7 +58,7 @@ spring:
     cache: false
 
 server:
-  port: 8088
+  port: 8080
 
 # ===================================================================
 # JHipster specific properties

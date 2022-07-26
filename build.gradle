@@ -24,7 +24,7 @@ plugins {
     //jhipster-needle-gradle-plugins - JHipster will add additional gradle plugins here
 }
 
-group = "com.hae"
+group = "com.hae.ecs.domain.charging"
 version = "0.0.1-SNAPSHOT"
 
 description = ""
@@ -81,7 +81,7 @@ eclipse {
 defaultTasks "bootRun"
 
 springBoot {
-    mainClass = "com.hae.EcsApp"
+    mainClass = "com.hae.ecs.domain.charging.EcsApp"
 }
 
 test {
@@ -156,7 +156,7 @@ liquibase {
             username "ecs"
             password ""
             changeLogFile project.ext.diffChangelogFile
-            referenceUrl "hibernate:spring:com.hae.domain?dialect=&hibernate.physical_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy&hibernate.implicit_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy"
+            referenceUrl "hibernate:spring:com.hae.ecs.domain.charging.domain?dialect=&hibernate.physical_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy&hibernate.implicit_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy"
             defaultSchemaName ""
             logLevel "debug"
             classpath "$buildDir/classes/java/main"
@@ -259,10 +259,6 @@ dependencies {
     implementation ("org.springdoc:springdoc-openapi-webmvc-core")
     implementation "org.mariadb.jdbc:mariadb-java-client"
     liquibaseRuntime "org.mariadb.jdbc:mariadb-java-client"
-
-    compileOnly 'org.projectlombok:lombok:1.18.20'
-    annotationProcessor 'org.projectlombok:lombok:1.18.20'
-
     implementation "org.mapstruct:mapstruct:${mapstructVersion}"
     annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
     annotationProcessor "org.hibernate:hibernate-jpamodelgen:${hibernateVersion}"

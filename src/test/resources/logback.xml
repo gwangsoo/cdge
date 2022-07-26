@@ -4,7 +4,7 @@
 <configuration scan="true">
     <include resource="org/springframework/boot/logging/logback/base.xml"/>
 
-    <logger name="com.hae" level="INFO"/>
+    <logger name="com.hae.ecs.domain.charging" level="INFO"/>
 
     <logger name="tech.jhipster" level="WARN"/>
 
