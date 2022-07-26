@@ -23,6 +23,7 @@
     <include file="config/liquibase/changelog/20220706083635_added_entity_Socket.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20220706083735_added_entity_Picture.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20220706083835_added_entity_Station.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20220726090144_added_entity_ChargingUseDisplay.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20220706083135_added_entity_constraints_Connector.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20220706083235_added_entity_constraints_Pricing.xml" relativeToChangelogFile="false"/>
