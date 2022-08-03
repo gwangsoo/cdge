@@ -15,9 +15,11 @@ services:
     ports:
       - 127.0.0.1:8080:8080
   ecs-mariadb:
-    image: mariadb:10.7.1
+    image: mariadb:10.8.3
     # volumes:
     #   - ~/volumes/jhipster/ecs/mysql/:/var/lib/mysql/
+    volumes:
+      - ./config/mariadb:/etc/mysql/conf.d
     environment:
       - MYSQL_ALLOW_EMPTY_PASSWORD=yes
       - MYSQL_DATABASE=ecs
