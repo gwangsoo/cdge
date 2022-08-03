@@ -1,0 +1,59 @@
+application {
+  config {
+    applicationType monolith
+    authenticationType jwt
+    baseName ecs
+    buildTool gradle
+    enableSwaggerCodegen true
+    languages [en,ko]
+    nativeLanguage ko
+    packageName com.hae.ecs.domain.charging
+    devDatabaseType h2Memory
+    prodDatabaseType mariadb
+    clientFramework vue
+    skipClient true
+  }
+  entities *
+  dto * with mapstruct
+  service * with serviceImpl
+  paginate * with infinite-scroll
+}
+
+/** 충전소 즐겨찾기 상태 */
+enum ChargingFavoriteStatus {
+    CHECK,
+    UNCHECK
+}
+
+/** 충전소 즐겨찾기 정보 */
+entity ChargingFavoritesSpot(tb_charging_favorites_spot) {
+    memNo String required maxlength(45)
+    cpoName String required maxlength(20)
+    locationId String required maxlength(40)
+    status ChargingFavoriteStatus required maxlength(20)
+}
+
+/** 충전 이력 정보 */
+entity ChargingUseHistory(tb_charging_use_history) {
+    chargingUseDisplayId String required maxlength(256) unique
+    locationId String required maxlength(40)
+    evseId String required maxlength(50)
+    connectorId String required maxlength(40)
+    memNo String maxlength(20)
+    carCd String maxlength(20)
+    startDateTime ZonedDateTime
+    endDateTime ZonedDateTime
+    firstSoc Double min(0) max(100)
+    finalSoc Double min(0) max(100)
+    firstDistance Integer min(0)
+    finalDistance Integer min(0)
+    name String maxlength(256)
+    address String required maxlength(50)
+    city String required maxlength(50)
+    postalCode String maxlength(10)
+    cpoName String required maxlength(20)
+    powerType String required maxlength(5)
+    totalCost Integer min(0)
+    totalEnergy Integer min(0)
+    totalTime Integer min(0)
+}
