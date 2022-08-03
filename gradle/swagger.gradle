@@ -8,8 +8,8 @@ openApiGenerate {
     generatorName = "spring"
     inputSpec = "$rootDir/src/main/resources/swagger/api.yml".toString()
     outputDir = "$buildDir/openapi".toString()
-    apiPackage = "com.hae.web.api"
-    modelPackage = "com.hae.service.api.dto"
+    apiPackage = "com.hae.ecs.domain.charging.web.api"
+    modelPackage = "com.hae.ecs.domain.charging.service.api.dto"
     apiFilesConstrainedTo = [""]
     modelFilesConstrainedTo = [""]
     supportingFilesConstrainedTo = ["ApiUtil.java"]
