@@ -1,7 +1,7 @@
 apply plugin: "war"
 
 bootWar {
-    mainClass = "com.hae.EcsApp"
+    mainClass = "com.hae.ecs.domain.charging.EcsApp"
     includes = ["WEB-INF/**", "META-INF/**"]
 }
 

@@ -1,0 +1,42 @@
+{
+  "applications": ["ecs"],
+  "changelogDate": "20220812003813",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "tb_charging_favorites_spot",
+  "fields": [
+    {
+      "fieldName": "memNo",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "45"
+    },
+    {
+      "fieldName": "cpoName",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "20"
+    },
+    {
+      "fieldName": "locationId",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "40"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "ChargingFavoriteStatus",
+      "fieldTypeJavadoc": "충전소 즐겨찾기 상태",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "CHECK,UNCHECK"
+    }
+  ],
+  "fluentMethods": true,
+  "javadoc": "충전소 즐겨찾기 정보",
+  "jpaMetamodelFiltering": false,
+  "name": "ChargingFavoritesSpot",
+  "pagination": "infinite-scroll",
+  "readOnly": false,
+  "relationships": [],
+  "service": "serviceImpl"
+}
